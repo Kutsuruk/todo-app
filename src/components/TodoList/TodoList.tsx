@@ -1,5 +1,6 @@
 import React, {FC} from "react";
 import {Box} from "@material-ui/core";
+import TodoItem from "./TodoItem/TodoItem";
 
 const todoLists = [
     {id: 1, name: 'task 1', description: 'Walk with a dog', checked: true},
@@ -18,13 +19,7 @@ const TodoList:FC = () => {
     return(
         <Box>
             {
-                todoLists.map(todoList => {
-                    return(
-                        <Box key={todoList.id}>
-                            {todoList.description}
-                        </Box>
-                    )
-                })
+                todoLists.map(todoList => <TodoItem todo={todoList} />)
             }
         </Box>
     )
