@@ -1,8 +1,12 @@
 import React, {FC, useState} from "react";
-import {Box, Button, Paper, TextField} from "@material-ui/core";
+import {Button, Paper, TextField} from "@material-ui/core";
+import {Todo} from "../../App";
 
+type PanelProps = {
+    onAddTodo: ({name, description}: Omit<Todo, 'id' | 'checked'>) => void
+}
 
-const Panel:FC = () => {
+const Panel:FC<PanelProps> = ({onAddTodo}) => {
     const [todo, setTodo] = useState({name: '', description: ''})
 
     const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -11,8 +15,8 @@ const Panel:FC = () => {
     }
 
     const onButtonClick = (): void => {
+        onAddTodo(todo)
         setTodo({name: '', description: ''})
-        console.log(todo)
     }
 
     return(

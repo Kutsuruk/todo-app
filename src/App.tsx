@@ -3,7 +3,6 @@ import Header from "./components/Header/Header";
 import Panel from "./components/Panel/Panel";
 import {Box} from "@material-ui/core";
 import TodoList from "./components/TodoList/TodoList";
-import todoList from "./components/TodoList/TodoList";
 
 export type Todo = {
     id: number,
@@ -24,11 +23,18 @@ function App() {
         setTodoLists(todoLists.filter(todo => todo.id !== todoId))
     }
 
+    const onAddTodo = ({name, description}: Omit<Todo, 'id' | 'checked'>): void => {
+        setTodoLists([
+            ...todoLists,
+            { id: Number([todoLists.length - 1]) + 1, description, name, checked: false }
+        ])
+    }
+
   return (
       <div>
           <Box style={{width: '50%'}} display='flex' flexDirection='column'>
               <Header />
-              <Panel />
+              <Panel onAddTodo={onAddTodo} />
               <TodoList onDeleteTodo={onDeleteTodo} todoLists={todoLists} />
           </Box>
       </div>

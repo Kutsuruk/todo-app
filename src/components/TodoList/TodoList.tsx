@@ -5,7 +5,7 @@ import {Todo} from "../../App";
 
 type TodoListProps = {
     todoLists: Todo[],
-    onDeleteTodo: (id: Todo['id']) => void
+    onDeleteTodo: (id: Todo['id']) => void,
 }
 
 const TodoList:FC<TodoListProps> = ({todoLists, onDeleteTodo}) => {
