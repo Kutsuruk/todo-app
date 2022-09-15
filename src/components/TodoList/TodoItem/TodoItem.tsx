@@ -1,16 +1,13 @@
 import React, {FC} from "react";
 import {Box, IconButton, Paper, Typography} from "@material-ui/core";
+import {Todo} from "../../../App";
 
 type TodoItemProps = {
-    todo: {
-        id: number,
-        name: string,
-        description: string,
-        checked: boolean
-    }
+    todo: Todo,
+    onDeleteTodo: (id: Todo['id']) => void
 }
 
-const TodoItem:FC<TodoItemProps> = ({todo}) => {
+const TodoItem:FC<TodoItemProps> = ({todo, onDeleteTodo}) => {
     return(
         <Paper elevation={3} style={{marginTop: '15px', padding: '20px 28px', borderRadius: '10px', display: 'flex', justifyContent: 'space-between', alignContent: 'center', gap: '2px'}}>
             <Box>
@@ -26,7 +23,7 @@ const TodoItem:FC<TodoItemProps> = ({todo}) => {
                 </Box>
             </Box>
             <Box>
-                <IconButton color='secondary' style={{fontSize: '15px'}} aria-label="delete">
+                <IconButton onClick={() => onDeleteTodo(todo.id)} color='secondary' style={{fontSize: '15px'}} aria-label="delete">
                     Delete
                 </IconButton>
             </Box>
