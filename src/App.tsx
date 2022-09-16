@@ -14,8 +14,8 @@ export type Todo = {
 function App() {
     const [todoLists, setTodoLists] = useState([
         {id: 1, name: 'task 1', description: 'Walk with a dog', checked: true},
-        {id: 2, name: 'task 2', description: 'Walk with a dogWalk with a dogWalk with a dog', checked: false},
-        {id: 3, name: 'task 3', description: 'Walk with a dogWalk with a dog', checked: true}
+        {id: 2, name: 'task 2', description: 'Walk with a dog Walk with a dog', checked: false},
+        {id: 3, name: 'task 3', description: 'Walk with a dog Walk with a dog', checked: true}
 
     ])
 
@@ -30,12 +30,21 @@ function App() {
         ])
     }
 
+    const onCheckTodo = (todoId: Todo['id']) : void => {
+        setTodoLists(todoLists.map(todo => {
+            if(todo.id === todoId) {
+                return {...todo, checked: !todo.checked}
+            }
+            return todo
+        }))
+    }
+
   return (
       <div>
           <Box style={{width: '50%'}} display='flex' flexDirection='column'>
               <Header />
               <Panel onAddTodo={onAddTodo} />
-              <TodoList onDeleteTodo={onDeleteTodo} todoLists={todoLists} />
+              <TodoList onCheckTodo={onCheckTodo} onDeleteTodo={onDeleteTodo} todoLists={todoLists} />
           </Box>
       </div>
   );

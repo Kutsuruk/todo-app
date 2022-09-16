@@ -1,13 +1,14 @@
 import React, {FC} from "react";
-import {Box, IconButton, Paper, Typography} from "@material-ui/core";
+import {Box, Checkbox, IconButton, Paper, Typography} from "@material-ui/core";
 import {Todo} from "../../../App";
 
 type TodoItemProps = {
     todo: Todo,
-    onDeleteTodo: (id: Todo['id']) => void
+    onDeleteTodo: (id: Todo['id']) => void,
+    onCheckTodo: (id: Todo['id']) => void,
 }
 
-const TodoItem:FC<TodoItemProps> = ({todo, onDeleteTodo}) => {
+const TodoItem:FC<TodoItemProps> = ({todo, onDeleteTodo, onCheckTodo}) => {
     return(
         <Paper elevation={3} style={{marginTop: '15px', padding: '20px 28px', borderRadius: '10px', display: 'flex', justifyContent: 'space-between', alignContent: 'center', gap: '2px'}}>
             <Box>
@@ -26,6 +27,10 @@ const TodoItem:FC<TodoItemProps> = ({todo, onDeleteTodo}) => {
                 <IconButton onClick={() => onDeleteTodo(todo.id)} color='secondary' style={{fontSize: '15px'}} aria-label="delete">
                     Delete
                 </IconButton>
+                <Checkbox
+                    checked={todo.checked}
+                    onChange={() => onCheckTodo(todo.id)}
+                />
             </Box>
         </Paper>
     )

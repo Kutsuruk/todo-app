@@ -6,13 +6,19 @@ import {Todo} from "../../App";
 type TodoListProps = {
     todoLists: Todo[],
     onDeleteTodo: (id: Todo['id']) => void,
+    onCheckTodo: (id: Todo['id']) => void,
 }
 
-const TodoList:FC<TodoListProps> = ({todoLists, onDeleteTodo}) => {
+const TodoList:FC<TodoListProps> = ({todoLists, onDeleteTodo, onCheckTodo}) => {
     return(
         <Box>
             {
-                todoLists.map(todoList => <TodoItem onDeleteTodo={onDeleteTodo} key={todoList.id} todo={todoList} />)
+                todoLists.map(todoList => <TodoItem
+                    key={todoList.id}
+                    onDeleteTodo={onDeleteTodo}
+                    todo={todoList}
+                    onCheckTodo={onCheckTodo}
+                />)
             }
         </Box>
     )
