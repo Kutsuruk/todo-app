@@ -1,6 +1,7 @@
 import React, {FC, useState} from "react";
 import {PanelProps} from "../../types";
 import {Button, Paper, TextField} from "@material-ui/core";
+import AddIcon from '@mui/icons-material/Add';
 
 const Panel:FC<PanelProps> = ({onAddTodo}) => {
     const [todo, setTodo] = useState({name: '', description: ''})
@@ -20,7 +21,9 @@ const Panel:FC<PanelProps> = ({onAddTodo}) => {
             <TextField name='name' label='Name' value={todo.name} onChange={onChange} />
             <TextField name='description' label='Description' value={todo.description} onChange={onChange} />
 
-            <Button onClick={onButtonClick} variant="outlined">Add</Button>
+            <Button onClick={onButtonClick} variant="outlined">
+                <AddIcon fontSize='small' />Add
+            </Button>
         </Paper>
     )
 }

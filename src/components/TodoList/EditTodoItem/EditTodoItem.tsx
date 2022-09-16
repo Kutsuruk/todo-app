@@ -1,6 +1,7 @@
 import React, {FC, useState} from "react";
 import {Button, Paper, TextField} from "@material-ui/core";
 import {EditTodoItemProps} from "../../../types";
+import CheckIcon from '@mui/icons-material/Check';
 
 const EditTodoItem:FC<EditTodoItemProps> = ({todo, onChangeTodo}) => {
     const [editTodo, setEditTodo] = useState({name: todo.name, description: todo.description})
@@ -19,7 +20,9 @@ const EditTodoItem:FC<EditTodoItemProps> = ({todo, onChangeTodo}) => {
             <TextField name='name' label='Name' value={editTodo.name} onChange={onChange} />
             <TextField name='description' label='Description' value={editTodo.description} onChange={onChange} />
 
-            <Button onClick={onButtonClick} variant="outlined">Edit</Button>
+            <Button onClick={onButtonClick} variant="outlined">
+                <CheckIcon fontSize='small' />
+            </Button>
         </Paper>
     )
 }

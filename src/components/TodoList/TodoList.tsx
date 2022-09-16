@@ -4,7 +4,13 @@ import TodoItem from "./TodoItem/TodoItem";
 import EditTodoItem from "./EditTodoItem/EditTodoItem";
 import {TodoListProps} from "../../types";
 
-const TodoList:FC<TodoListProps> = ({todoLists, onDeleteTodo, onCheckTodo, onEditTodo, editTodoId, onChangeTodo}) => {
+const TodoList:FC<TodoListProps> = ({
+        todoLists,
+        onDeleteTodo,
+        onCheckTodo,
+        onEditTodo,
+        editTodoId,
+        onChangeTodo}) => {
     return(
         <Box>
             {
