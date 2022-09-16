@@ -29,3 +29,7 @@ export type TodoItemProps = {
     onCheckTodo: (id: Todo['id']) => void,
     onEditTodo: (id: Todo['id']) => void,
 }
+
+export type HeaderProps = {
+    todoCount: number
+}

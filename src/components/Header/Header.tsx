@@ -1,12 +1,19 @@
 import React, {FC} from "react";
-import {Box, Typography} from "@material-ui/core";
+import {Box, makeStyles, Typography} from "@material-ui/core";
+import {HeaderProps} from "../../types";
 
-
-const Header:FC = () => {
+const Header:FC<HeaderProps> = ({todoCount}) => {
+    const useStyles = makeStyles({
+        heading: {
+            fontSize: '3rem',
+            textAlign: 'left',
+        }
+    })
+    const classes = useStyles();
     return(
         <Box>
-            <Typography style={{fontSize: '35px', textAlign: 'left'}} variant="h1" component="h1">
-                To-Do List App
+            <Typography className={classes.heading} component="h1">
+                To-Do List {todoCount}
             </Typography>
         </Box>
     )

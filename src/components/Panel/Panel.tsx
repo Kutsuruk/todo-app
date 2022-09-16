@@ -1,6 +1,6 @@
 import React, {FC, useState} from "react";
 import {PanelProps} from "../../types";
-import {Button, Paper, TextField} from "@material-ui/core";
+import {Button, makeStyles, Paper, TextField} from "@material-ui/core";
 import AddIcon from '@mui/icons-material/Add';
 
 const Panel:FC<PanelProps> = ({onAddTodo}) => {
@@ -16,12 +16,42 @@ const Panel:FC<PanelProps> = ({onAddTodo}) => {
         setTodo({name: '', description: ''})
     }
 
-    return(
-        <Paper elevation={3} style={{padding: '25px 30px', borderRadius: '10px', display: 'flex', justifyContent: 'space-between', alignContent: 'center', gap: '2px'}}>
-            <TextField name='name' label='Name' value={todo.name} onChange={onChange} />
-            <TextField name='description' label='Description' value={todo.description} onChange={onChange} />
+    const useStyles = makeStyles({
+        panelPaperWrapper: {
+            padding: '2.5% 4%',
+            borderRadius: '10px',
+        },
+        nameField: {
+            marginRight: '10px',
+        },
+        descriptionField: {
+            marginRight: '10px',
+        },
+        addButton: {
+            margin: '14px',
+            fontSize: '0.8rem'
+        }
+    })
+    const classes = useStyles()
 
-            <Button onClick={onButtonClick} variant="outlined">
+    return(
+        <Paper className={classes.panelPaperWrapper} elevation={3}>
+            <TextField
+                className={classes.nameField}
+                name='name'
+                label='Name'
+                value={todo.name}
+                onChange={onChange}
+            />
+            <TextField
+                className={classes.descriptionField}
+                name='description'
+                label='Description'
+                value={todo.description}
+                onChange={onChange}
+            />
+
+            <Button className={classes.addButton} onClick={onButtonClick} variant="outlined">
                 <AddIcon fontSize='small' />Add
             </Button>
         </Paper>

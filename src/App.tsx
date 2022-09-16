@@ -4,6 +4,7 @@ import Panel from "./components/Panel/Panel";
 import {Box} from "@material-ui/core";
 import TodoList from "./components/TodoList/TodoList";
 import {Todo} from "./types";
+import classes from './App.module.scss'
 
 function App() {
     const todoListInitialState = [
@@ -55,8 +56,8 @@ function App() {
 
   return (
       <div>
-          <Box style={{width: '50%'}} display='flex' flexDirection='column'>
-              <Header />
+          <Box className={classes.mainContainer}>
+              <Header todoCount={todoLists.length} />
               <Panel onAddTodo={onAddTodo} />
               <TodoList
                   onEditTodo={onEditTodo}
