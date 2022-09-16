@@ -3,22 +3,18 @@ import Header from "./components/Header/Header";
 import Panel from "./components/Panel/Panel";
 import {Box} from "@material-ui/core";
 import TodoList from "./components/TodoList/TodoList";
-
-export type Todo = {
-    id: number,
-    name: string,
-    description: string,
-    checked: boolean
-}
+import {Todo} from "./types";
 
 function App() {
-    const [editTodoId, setEditTodoId] = useState<number | null>(null)
-    const [todoLists, setTodoLists] = useState([
+    const todoListInitialState = [
         {id: 1, name: 'task 1', description: 'Walk with a dog', checked: true},
         {id: 2, name: 'task 2', description: 'Walk with a dog Walk with a dog', checked: false},
         {id: 3, name: 'task 3', description: 'Walk with a dog Walk with a dog', checked: true}
 
-    ])
+    ]
+
+    const [editTodoId, setEditTodoId] = useState<number | null>(null)
+    const [todoLists, setTodoLists] = useState(todoListInitialState)
 
     const onEditTodo = (todoId: Todo['id']): void => {
         setEditTodoId(todoId)

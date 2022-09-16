@@ -1,11 +1,6 @@
 import React, {FC, useState} from "react";
-import {Box, Button, IconButton, Paper, TextField, Typography} from "@material-ui/core";
-import {Todo} from "../../../App";
-
-type EditTodoItemProps = {
-    todo: Todo,
-    onChangeTodo: ({name, description}: Omit<Todo, 'id' | 'checked'>) => void,
-}
+import {Button, Paper, TextField} from "@material-ui/core";
+import {EditTodoItemProps} from "../../../types";
 
 const EditTodoItem:FC<EditTodoItemProps> = ({todo, onChangeTodo}) => {
     const [editTodo, setEditTodo] = useState({name: todo.name, description: todo.description})

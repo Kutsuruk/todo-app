@@ -1,13 +1,6 @@
 import React, {FC} from "react";
 import {Box, IconButton, Paper, Typography} from "@material-ui/core";
-import {Todo} from "../../../App";
-
-type TodoItemProps = {
-    todo: Todo,
-    onDeleteTodo: (id: Todo['id']) => void,
-    onCheckTodo: (id: Todo['id']) => void,
-    onEditTodo: (id: Todo['id']) => void,
-}
+import {Todo, TodoItemProps} from "../../../types";
 
 const TodoItem:FC<TodoItemProps> = ({todo, onDeleteTodo, onCheckTodo, onEditTodo}) => {
     return(
