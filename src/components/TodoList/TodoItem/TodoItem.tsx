@@ -1,5 +1,5 @@
 import React, {FC} from "react";
-import {Box, IconButton, Paper, Typography} from "@material-ui/core";
+import {Box, IconButton, makeStyles, Paper, Typography} from "@material-ui/core";
 import {TodoItemProps} from "../../../types";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
@@ -10,25 +10,68 @@ const TodoItem:FC<TodoItemProps> = ({
         onDeleteTodo,
         onCheckTodo,
         onEditTodo}) => {
+
+    const useStyles = makeStyles({
+        todoItemWrapper: {
+            marginTop: '15px',
+            padding: '20px 28px',
+            borderRadius: '10px',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignContent: 'center',
+            gap: '2px'
+        },
+        todoItemNameField: {
+            cursor: 'pointer',
+            margin: '0',
+            textAlign: 'left',
+            textDecoration: todo.checked ? 'line-through' : 'none',
+        },
+        todoItemDescriptionField: {
+            margin: '0',
+            textAlign: 'left',
+        },
+    })
+
+    const classes = useStyles();
+
+
     return(
-        <Paper elevation={3} style={{marginTop: '15px', padding: '20px 28px', borderRadius: '10px', display: 'flex', justifyContent: 'space-between', alignContent: 'center', gap: '2px'}}>
+        <Paper elevation={3} className={classes.todoItemWrapper}>
             <Box>
                 <Box>
-                    <Typography onClick={() => onCheckTodo(todo.id)} style={{cursor: 'pointer', textDecoration: todo.checked ? 'line-through' : 'none' , margin: '0', textAlign: 'left'}} variant="h4" component="h4">
-                        {todo.name}
+                    <Typography
+                        className={classes.todoItemNameField}
+                        onClick={() => onCheckTodo(todo.id)}
+                        variant="h4"
+                        component="h4"
+                    >
+                        {(todo.name).charAt(0).toUpperCase() + (todo.name).slice(1)}
                     </Typography>
                 </Box>
                 <Box>
-                    <Typography style={{margin: '0', textAlign: 'left'}} variant="subtitle1" component="div">
-                        {todo.description}
+                    <Typography
+                        className={classes.todoItemDescriptionField}
+                        variant="subtitle1"
+                        component="div"
+                    >
+                        {(todo.description).charAt(0).toUpperCase() + (todo.description).slice(1)}
                     </Typography>
                 </Box>
             </Box>
             <Box>
-                <IconButton onClick={() => onDeleteTodo(todo.id)} color='secondary' style={{fontSize: '15px'}} aria-label="delete">
+                <IconButton
+                    onClick={() => onDeleteTodo(todo.id)}
+                    color='secondary'
+                    aria-label="delete"
+                >
                     <DeleteIcon />
                 </IconButton>
-                <IconButton onClick={() => onEditTodo(todo.id)} color='primary' style={{fontSize: '15px'}} aria-label='edit'>
+                <IconButton
+                    onClick={() => onEditTodo(todo.id)}
+                    color='primary'
+                    aria-label='edit'
+                >
                     <EditIcon />
                 </IconButton>
             </Box>

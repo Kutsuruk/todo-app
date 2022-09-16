@@ -1,5 +1,5 @@
 import React, {FC} from "react";
-import {Box} from "@material-ui/core";
+import {Box, makeStyles} from "@material-ui/core";
 import TodoItem from "./TodoItem/TodoItem";
 import EditTodoItem from "./EditTodoItem/EditTodoItem";
 import {TodoListProps} from "../../types";
@@ -11,8 +11,20 @@ const TodoList:FC<TodoListProps> = ({
         onEditTodo,
         editTodoId,
         onChangeTodo}) => {
+
+    const useStyles = makeStyles({
+        todoListWrapper: {
+            display: 'flex',
+            flexDirection: 'column',
+            maxWidth: '40%',
+            width: '100%'
+        }
+    })
+
+    const classes = useStyles()
+
     return(
-        <Box>
+        <Box className={classes.todoListWrapper}>
             {
                 todoLists.map(todoList => {
                     if (todoList.id === editTodoId) {
