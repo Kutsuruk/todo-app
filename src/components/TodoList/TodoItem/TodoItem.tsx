@@ -1,19 +1,20 @@
 import React, {FC} from "react";
-import {Box, Checkbox, IconButton, Paper, Typography} from "@material-ui/core";
+import {Box, IconButton, Paper, Typography} from "@material-ui/core";
 import {Todo} from "../../../App";
 
 type TodoItemProps = {
     todo: Todo,
     onDeleteTodo: (id: Todo['id']) => void,
     onCheckTodo: (id: Todo['id']) => void,
+    onEditTodo: (id: Todo['id']) => void,
 }
 
-const TodoItem:FC<TodoItemProps> = ({todo, onDeleteTodo, onCheckTodo}) => {
+const TodoItem:FC<TodoItemProps> = ({todo, onDeleteTodo, onCheckTodo, onEditTodo}) => {
     return(
         <Paper elevation={3} style={{marginTop: '15px', padding: '20px 28px', borderRadius: '10px', display: 'flex', justifyContent: 'space-between', alignContent: 'center', gap: '2px'}}>
             <Box>
                 <Box>
-                    <Typography style={{cursor: 'pointer', textDecoration: todo.checked ? 'line-through' : 'none' , margin: '0', textAlign: 'left'}} variant="h4" component="h4">
+                    <Typography onClick={() => onCheckTodo(todo.id)} style={{cursor: 'pointer', textDecoration: todo.checked ? 'line-through' : 'none' , margin: '0', textAlign: 'left'}} variant="h4" component="h4">
                         {todo.name}
                     </Typography>
                 </Box>
@@ -27,10 +28,9 @@ const TodoItem:FC<TodoItemProps> = ({todo, onDeleteTodo, onCheckTodo}) => {
                 <IconButton onClick={() => onDeleteTodo(todo.id)} color='secondary' style={{fontSize: '15px'}} aria-label="delete">
                     Delete
                 </IconButton>
-                <Checkbox
-                    checked={todo.checked}
-                    onChange={() => onCheckTodo(todo.id)}
-                />
+                <IconButton onClick={() => onEditTodo(todo.id)} color='primary' style={{fontSize: '15px'}} aria-label='edit'>
+                    Edit
+                </IconButton>
             </Box>
         </Paper>
     )

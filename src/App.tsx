@@ -12,12 +12,17 @@ export type Todo = {
 }
 
 function App() {
+    const [editTodoId, setEditTodoId] = useState<number | null>(null)
     const [todoLists, setTodoLists] = useState([
         {id: 1, name: 'task 1', description: 'Walk with a dog', checked: true},
         {id: 2, name: 'task 2', description: 'Walk with a dog Walk with a dog', checked: false},
         {id: 3, name: 'task 3', description: 'Walk with a dog Walk with a dog', checked: true}
 
     ])
+
+    const onEditTodo = (todoId: Todo['id']): void => {
+        setEditTodoId(todoId)
+    }
 
     const onDeleteTodo = (todoId: Todo['id']): void => {
         setTodoLists(todoLists.filter(todo => todo.id !== todoId))
@@ -39,12 +44,32 @@ function App() {
         }))
     }
 
+    const onChangeTodo = ({name, description}: Omit<Todo, 'id' | 'checked'>): void => {
+        setTodoLists(
+            todoLists.map(todo => {
+            if(todo.id === editTodoId) {
+                return {...todo, name, description}
+            }
+            return todo
+        })
+        )
+
+        setEditTodoId(null)
+    }
+
   return (
       <div>
           <Box style={{width: '50%'}} display='flex' flexDirection='column'>
               <Header />
               <Panel onAddTodo={onAddTodo} />
-              <TodoList onCheckTodo={onCheckTodo} onDeleteTodo={onDeleteTodo} todoLists={todoLists} />
+              <TodoList
+                  onEditTodo={onEditTodo}
+                  onCheckTodo={onCheckTodo}
+                  onDeleteTodo={onDeleteTodo}
+                  todoLists={todoLists}
+                  editTodoId={editTodoId}
+                  onChangeTodo={onChangeTodo}
+              />
           </Box>
       </div>
   );
